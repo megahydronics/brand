@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Email Signature V1</title>
+		<style>
+			p {
+				font-family: Arial, sans-serif;
+				font-size: 12px;
+			}
+			a {
+				text-decoration: none;
+			}
+			button {
+				padding: 4px 8px;
+			}
+		</style>
+		<script>
+			function copyElement(elementId) {
+				copyWithStyle(elementId)
+			}
+
+			function copyWithStyle(id) {
+				const text = document.getElementById(id)
+				let range
+				let selection
+
+				if (document.body.createTextRange) {
+					range = document.body.createTextRange()
+					range.moveToElement(text)
+					range.select()
+				} else if (window.getSelection) {
+					selection = window.getSelection()
+
+					range = document.createRange()
+					range.selectNodeContents(text)
+
+					selection.removeAllRanges()
+					selection.addRange(range)
+				}
+
+				document.execCommand('copy')
+				window.getSelection().removeAllRanges()
+			}
+		</script>
+	</head>
+	<body id='body'>
+		<button onclick="copyElement('contact')">Contact</button>
+		<button onclick="copyElement('logo')">Logo</button>
+		<button onclick="copyElement('body')">Socials</button>
+		<p id="contact">
+			604-620-612
+			<br />
+			114-4268 Lozells Ave, Burnaby
+		</p>
+		<div id="logo">
+			<a href="https://megahydronics.com/">
+				<img src="https://megahydronics.frappe.cloud/files/MegaHydronics%20Banner.png" />
+			</a>
+		</div>
+		<div id="socials">
+			<a href="https://ca.linkedin.com/company/megahydronics-inc">
+				<img class="icon" src="https://megahydronics.frappe.cloud/files/LinkedIn.png" />
+			</a>
+			<a href="https://www.facebook.com/MegaHydronics">
+				<img class="icon" src="https://megahydronics.frappe.cloud/files/Facebook.png" />
+			</a>
+			<a href="https://www.instagram.com/megahydronics">
+				<img class="icon" src="https://megahydronics.frappe.cloud/files/Instagram.png" />
+			</a>
+		</div>
+	</body>
+</html>
