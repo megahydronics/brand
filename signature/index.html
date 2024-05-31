@@ -3,24 +3,54 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Email Signature V1</title>
+		<title>Email Signature V2</title>
 		<style>
-			p {
-				font-family: Arial, sans-serif;
-				font-size: 12px;
+			body {
+				height: 100vh;
+				width: 100vw;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+			}
+			button {
+				padding: 4px 8px;
+				margin-bottom: 20px;
+				border-radius: 4px;
+				border: none;
+				cursor: pointer;
+				background-color: rgb(229, 230, 233);
+			}
+			button:hover {
+				background-color: rgb(219, 219, 222);
 			}
 			a {
 				text-decoration: none;
 			}
-			button {
+			p {
+				font-family: Arial, sans-serif;
+				font-size: 12px;
+				margin: unset;
+			}
+			input {
 				padding: 4px 8px;
+				border-radius: 4px;
+				border: solid 1px rgb(178, 186, 194);
+			}
+			.form {
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+			}
+			.name {
+				font-size: 14px;
+				font-weight: 600;
+			}
+			.title {
+				font-size: 14px;
 			}
 		</style>
 		<script>
-			function copyElement(elementId) {
-				copyWithStyle(elementId)
-			}
-
 			function copyWithStyle(id) {
 				const text = document.getElementById(id)
 				let range
@@ -43,32 +73,43 @@
 				document.execCommand('copy')
 				window.getSelection().removeAllRanges()
 			}
+
+			function updateValue(id) {}
 		</script>
 	</head>
-	<body id='body'>
-		<button onclick="copyElement('contact')">Contact</button>
-		<button onclick="copyElement('logo')">Logo</button>
-		<button onclick="copyElement('body')">Socials</button>
-		<p id="contact">
-			604-620-612
-			<br />
-			114-4268 Lozells Ave, Burnaby
-		</p>
-		<div id="logo">
-			<a href="https://megahydronics.com">
-				<img src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/megahydronics.png" />
-			</a>
+	<body>
+		<div class="form">
+			<input onchange="update('name')" type="text" placeholder="Name" />
+			<input onchange="update('title')" type="text" placeholder="Title" />
+			<button onclick="copyWithStyle('signature')">Copy Signature</button>
 		</div>
-		<div id="socials">
-			<a href="https://ca.linkedin.com/company/megahydronics-inc">
-				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/linkedin.png" />
-			</a>
-			<a href="https://www.facebook.com/MegaHydronics">
-				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/facebook.png" />
-			</a>
-			<a href="https://www.instagram.com/megahydronics">
-				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/instagram.png" />
-			</a>
+		<div id="signature">
+			<p>
+				<span class="name" id="name">Elizabeth Bennet</span>
+				<br />
+				<span class="title" id="title">Editorial Director</span>
+				<br />
+				<br />
+				<a href="https://megahydronics.com">
+					<img src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/megahydronics.png" />
+				</a>
+				<br />
+				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/location.png" />
+				114-4268 Lozells Ave, Burnaby
+				<br />
+				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/phone.png" />
+				604-620-6121
+				<br />
+				<a href="https://ca.linkedin.com/company/megahydronics-inc">
+					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/linkedin.png" />
+				</a>
+				<a href="https://www.facebook.com/MegaHydronics">
+					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/facebook.png" />
+				</a>
+				<a href="https://www.instagram.com/megahydronics">
+					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/instagram.png" />
+				</a>
+			</p>
 		</div>
 	</body>
 </html>
