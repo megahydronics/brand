@@ -3,8 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Email Signature V2</title>
+		<link rel="icon" href="../logo/square.png" />
+		<title>Signature V2</title>
 		<style>
+			* {
+				font-family: Arial, sans-serif;
+			}
 			body {
 				height: 100vh;
 				width: 100vw;
@@ -12,10 +16,12 @@
 				justify-content: center;
 				align-items: center;
 				flex-direction: column;
+				gap: 8px;
+				margin: unset;
 			}
 			button {
 				padding: 4px 8px;
-				margin-bottom: 20px;
+				margin-top: 10px;
 				border-radius: 4px;
 				border: none;
 				cursor: pointer;
@@ -26,9 +32,9 @@
 			}
 			a {
 				text-decoration: none;
+				color: unset;
 			}
 			p {
-				font-family: Arial, sans-serif;
 				font-size: 12px;
 				margin: unset;
 			}
@@ -37,57 +43,59 @@
 				border-radius: 4px;
 				border: solid 1px rgb(178, 186, 194);
 			}
-			.form {
-				display: flex;
-				flex-direction: column;
-				gap: 4px;
-			}
-			.name {
+			#name {
 				font-size: 14px;
 				font-weight: 600;
 			}
-			.title {
+			#title {
 				font-size: 14px;
+			}
+			#signature {
+				border: solid 1px;
+				border-color: rgb(118, 118, 122);
+				margin-top: 10px;
+			}
+			h1 {
+				font-size: 18px;
 			}
 		</style>
 		<script>
 			function copyWithStyle(id) {
-				const text = document.getElementById(id)
+				const element = document.getElementById(id)
 				let range
 				let selection
 
 				if (document.body.createTextRange) {
 					range = document.body.createTextRange()
-					range.moveToElement(text)
+					range.moveToElement(element)
 					range.select()
 				} else if (window.getSelection) {
 					selection = window.getSelection()
-
 					range = document.createRange()
-					range.selectNodeContents(text)
-
+					range.selectNodeContents(element)
 					selection.removeAllRanges()
 					selection.addRange(range)
 				}
-
 				document.execCommand('copy')
 				window.getSelection().removeAllRanges()
 			}
 
-			function updateValue(id) {}
+			function updateValue(id, element) {
+				console.log(element.value)
+				target = document.getElementById(id)
+				target.textContent = element.value.trim()
+			}
 		</script>
 	</head>
 	<body>
-		<div class="form">
-			<input onchange="update('name')" type="text" placeholder="Name" />
-			<input onchange="update('title')" type="text" placeholder="Title" />
-			<button onclick="copyWithStyle('signature')">Copy Signature</button>
-		</div>
+		<h1>Build Your Signature</h1>
+		<input oninput="updateValue('name', this)" type="text" placeholder="Name" />
+		<input oninput="updateValue('title', this)" type="text" placeholder="Title" />
 		<div id="signature">
 			<p>
-				<span class="name" id="name">Elizabeth Bennet</span>
+				<span id="name">Elizabeth Bennet</span>
 				<br />
-				<span class="title" id="title">Editorial Director</span>
+				<span id="title">Editorial Director</span>
 				<br />
 				<br />
 				<a href="https://megahydronics.com">
@@ -97,7 +105,7 @@
 				114-4268 Lozells Ave, Burnaby
 				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/spacer.png" />
 				<br />
-				604-620-6121
+				<a href="tel:+16046206121">604-620-6121</a>
 				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/spacer.png" />
 				<br />
 				<a href="https://ca.linkedin.com/company/megahydronics-inc">
@@ -111,5 +119,6 @@
 				</a>
 			</p>
 		</div>
+		<button onclick="copyWithStyle('signature')">Copy Signature</button>
 	</body>
 </html>
