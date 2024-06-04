@@ -57,9 +57,14 @@
 		</style>
 		<script>
 			function init() {
+				const dev = false
 				const icons = ['megahydronics', 'linkedin', 'facebook', 'instagram', 'spacer']
-				for (const icon of icons)
-					for (const element of document.getElementsByClassName(icon)) element.src = `https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/${icon}.png`
+				for (const icon of icons) {
+					for (const element of document.getElementsByClassName(icon)) {
+						const path = dev ? '.' : 'https://raw.githubusercontent.com/megahydronics/brand/main/signature'
+						element.src = `${path}/2/${icon}.png`
+					}
+				}
 			}
 
 			function copy(id) {
@@ -87,7 +92,7 @@
 				target.textContent = element.value.trim()
 			}
 
-			document.addEventListener('DOMContentLoaded', init, false);
+			document.addEventListener('DOMContentLoaded', init, false)
 		</script>
 	</head>
 	<body>
@@ -100,24 +105,14 @@
 			<span id="title">Editorial Director</span>
 			<br />
 			<br />
-			<a href="https://megahydronics.com">
-				<img class="megahydronics" />
-			</a>
+			<a href="https://megahydronics.com"><img class="megahydronics" /></a>
 			<br />
-			114-4268 Lozells Ave<img class="spacer" />
+			114-4268 Lozells Ave, Burnaby, BC V5A 0C6<img class="spacer" />
 			<br />
-			Burnaby, BC V5A 0C6<img class="spacer" />
-			<br />
-			<a href="tel:+16046206121">604-620-6121</a>&nbsp;
-			<a href="https://ca.linkedin.com/company/megahydronics-inc">
-				<img class="linkedin" />
-			</a>
-			<a href="https://www.facebook.com/MegaHydronics">
-				<img class="facebook" />
-			</a>
-			<a href="https://www.instagram.com/megahydronics">
-				<img class="instagram" />
-			</a>
+			604-620-6121&nbsp;
+			<a href="https://ca.linkedin.com/company/megahydronics-inc"><img class="linkedin" /></a>
+			<a href="https://www.facebook.com/MegaHydronics"><img class="facebook" /></a>
+			<a href="https://www.instagram.com/megahydronics"><img class="instagram" /></a>
 		</div>
 		<button onclick="copy('signature')">Copy Signature</button>
 	</body>
