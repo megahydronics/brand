@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="../logo/square.png" />
-		<title>Signature V2</title>
+		<title>Signature</title>
 		<style>
 			* {
 				font-family: Arial, sans-serif;
@@ -13,15 +13,14 @@
 				height: 100vh;
 				width: 100vw;
 				display: flex;
+				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				flex-direction: column;
-				gap: 8px;
+				gap: 12px;
 				margin: unset;
 			}
 			button {
 				padding: 4px 8px;
-				margin-top: 20px;
 				border-radius: 4px;
 				border: none;
 				cursor: pointer;
@@ -31,17 +30,18 @@
 				background-color: rgb(219, 219, 222);
 			}
 			a {
-				text-decoration: none;
+				text-decoration: unset;
 				color: unset;
 			}
-			p {
-				font-size: 12px;
-				margin: unset;
-			}
 			input {
+				font-size: 14px;
 				padding: 4px 8px;
 				border-radius: 4px;
 				border: solid 1px rgb(178, 186, 194);
+			}
+			h1 {
+				font-size: 18px;
+				margin: unset;
 			}
 			#name {
 				font-size: 14px;
@@ -51,15 +51,18 @@
 				font-size: 14px;
 			}
 			#signature {
-				margin-top: 20px;
+				font-size: 12px;
 				border: 1px solid rgb(204, 204, 209);
-			}
-			h1 {
-				font-size: 18px;
 			}
 		</style>
 		<script>
-			function copyWithStyle(id) {
+			function init() {
+				const icons = ['megahydronics', 'linkedin', 'facebook', 'instagram', 'spacer']
+				for (const icon of icons)
+					for (const element of document.getElementsByClassName(icon)) element.src = `https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/${icon}.png`
+			}
+
+			function copy(id) {
 				const element = document.getElementById(id)
 				let range
 				let selection
@@ -79,50 +82,43 @@
 				window.getSelection().removeAllRanges()
 			}
 
-			function updateValue(id, element) {
-				console.log(element.value)
+			function update(id, element) {
 				target = document.getElementById(id)
 				target.textContent = element.value.trim()
 			}
+
+			document.addEventListener('DOMContentLoaded', init, false);
 		</script>
 	</head>
 	<body>
-		<div class="form"></div>
 		<h1>Build Your Signature</h1>
-		<input oninput="updateValue('name', this)" type="text" placeholder="Name" />
-		<input oninput="updateValue('title', this)" type="text" placeholder="Title" />
+		<input oninput="update('name', this)" type="text" placeholder="Name" autocomplete="off" />
+		<input oninput="update('title', this)" type="text" placeholder="Title" autocomplete="off" />
 		<div id="signature">
-			<p>
-				<span id="name">Elizabeth Bennet</span>
-				<br />
-				<span id="title">Editorial Director</span>
-				<br />
-				<br />
-				<a href="https://megahydronics.com">
-					<img src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/megahydronics.png" />
-				</a>
-				<br />
-				114-4268 Lozells Ave
-				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/spacer.png" />
-				<br />
-				Burnaby, BC V5A 0C6
-				<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/spacer.png" />
-				<br />
-				<a href="tel:+16046206121">604-620-6121</a>
-				&nbsp;
-				<!-- <img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/spacer.png" /> -->
-				<!-- <br /> -->
-				<a href="https://ca.linkedin.com/company/megahydronics-inc">
-					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/linkedin.png" />
-				</a>
-				<a href="https://www.facebook.com/MegaHydronics">
-					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/facebook.png" />
-				</a>
-				<a href="https://www.instagram.com/megahydronics">
-					<img class="icon" src="https://raw.githubusercontent.com/megahydronics/brand/main/signature/2/instagram.png" />
-				</a>
-			</p>
+			<span id="name">Elizabeth Bennet</span>
+			<br />
+			<span id="title">Editorial Director</span>
+			<br />
+			<br />
+			<a href="https://megahydronics.com">
+				<img class="megahydronics" />
+			</a>
+			<br />
+			114-4268 Lozells Ave<img class="spacer" />
+			<br />
+			Burnaby, BC V5A 0C6<img class="spacer" />
+			<br />
+			<a href="tel:+16046206121">604-620-6121</a>&nbsp;
+			<a href="https://ca.linkedin.com/company/megahydronics-inc">
+				<img class="linkedin" />
+			</a>
+			<a href="https://www.facebook.com/MegaHydronics">
+				<img class="facebook" />
+			</a>
+			<a href="https://www.instagram.com/megahydronics">
+				<img class="instagram" />
+			</a>
 		</div>
-		<button onclick="copyWithStyle('signature')">Copy Signature</button>
+		<button onclick="copy('signature')">Copy Signature</button>
 	</body>
 </html>
