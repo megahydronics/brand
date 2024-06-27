@@ -13,16 +13,12 @@
 			body {
 				height: 100vh;
 				width: 100vw;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				gap: 24px;
 				margin: unset;
-			}
-			.form {
 				display: flex;
 				flex-direction: column;
-				gap: 8px;
+				justify-content: center;
+				align-items: center;
+				gap: 20px;
 			}
 			button {
 				padding: 4px 8px;
@@ -38,15 +34,6 @@
 				text-decoration: unset;
 				color: unset;
 			}
-			input {
-				padding: 4px 8px;
-				border-radius: 4px;
-				border: solid 1px rgb(178, 186, 194);
-			}
-			h1 {
-				font-size: 14pt;
-				margin: unset;
-			}
 			#name {
 				font-weight: bold;
 			}
@@ -58,19 +45,18 @@
 		<script>
 			function init() {
 				const dev = false
+				const path = dev ? '.' : 'https://raw.githubusercontent.com/megahydronics/brand/main/signature'
 				const icons = ['megahydronics', 'linkedin', 'facebook', 'instagram', 'spacer']
-				for (const icon of icons) {
-					for (const element of document.getElementsByClassName(icon)) {
-						const path = dev ? '.' : 'https://raw.githubusercontent.com/megahydronics/brand/main/signature'
-						element.src = `${path}/2/${icon}.png`
-					}
-				}
+				for (const icon of icons) for (const element of document.getElementsByClassName(icon)) element.src = `${path}/2/${icon}.png`
+
+				const params = new URLSearchParams(window.location.search)
+				document.getElementById('name').textContent = params.get('name').trim() || 'Elizabeth Bennet'
+				document.getElementById('title').textContent = params.get('title').trim() || 'Editorial Director'
 			}
 
-			function copy(id) {
-				const element = document.getElementById(id)
-				let range
-				let selection
+			function copySignature() {
+				const element = document.getElementById('signature')
+				let range, selection
 
 				if (document.body.createTextRange) {
 					range = document.body.createTextRange()
@@ -87,25 +73,14 @@
 				window.getSelection().removeAllRanges()
 			}
 
-			function update(id, element) {
-				target = document.getElementById(id)
-				target.textContent = element.value.trim()
-			}
-
 			document.addEventListener('DOMContentLoaded', init, false)
 		</script>
 	</head>
 	<body>
-		<div class="form">
-			<h1>Build Your Signature</h1>
-			<input oninput="update('name', this)" type="text" placeholder="Name" autocomplete="off" />
-			<input oninput="update('title', this)" type="text" placeholder="Title" autocomplete="off" />
-			<button onclick="copy('signature')">Copy Signature</button>
-		</div>
 		<div id="signature">
-			<span id="name">Elizabeth Bennet</span>
+			<span id="name"></span>
 			<br />
-			<span id="title">Editorial Director</span>
+			<span id="title"></span>
 			<br />
 			<br />
 			<a href="https://megahydronics.com"><img class="megahydronics" /></a>
@@ -117,5 +92,6 @@
 			<a href="https://www.facebook.com/MegaHydronics"><img class="facebook" /></a>
 			<a href="https://www.instagram.com/megahydronics"><img class="instagram" /></a>
 		</div>
+		<button onclick="copySignature()">Copy Signature</button>
 	</body>
 </html>
