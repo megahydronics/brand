@@ -6,10 +6,6 @@
 		<link rel="icon" href="../logo/square.png" />
 		<title>Email Signature</title>
 		<style>
-			* {
-				font-family: Arial, sans-serif;
-				font-size: 11pt;
-			}
 			body {
 				height: 100vh;
 				width: 100vw;
@@ -18,7 +14,7 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				gap: 20px;
+				gap: 32px;
 			}
 			button {
 				padding: 4px 8px;
@@ -26,29 +22,28 @@
 				border: none;
 				cursor: pointer;
 				background-color: rgb(229, 230, 233);
+				font-size: 11pt;
 			}
 			button:hover {
 				background-color: rgb(219, 219, 222);
 			}
-			a {
-				text-decoration: unset;
-				color: unset;
-			}
-			#name {
-				font-weight: bold;
-			}
-			#signature {
-				font-size: 9pt;
-				border: 1px solid rgb(204, 204, 209);
-			}
 		</style>
 		<script>
 			function init() {
-				const dev = false
-				const path = dev ? '.' : 'https://raw.githubusercontent.com/megahydronics/brand/main/signature'
-				const icons = ['megahydronics', 'linkedin', 'facebook', 'instagram', 'spacer']
-				for (const icon of icons) for (const element of document.getElementsByClassName(icon)) element.src = `${path}/2/${icon}.png`
-
+				const dev = true
+				const root = dev ? '.' : 'https://raw.githubusercontent.com/megahydronics/brand/main/signature'
+				const logos = {
+					MegaHydronics: '3/megahydronics.png',
+					LinkedIn: '3/linkedin.png',
+					Facebook: '3/facebook.png',
+					Instagram: '3/instagram.png',
+				}
+				for (const [name, path] of Object.entries(logos)) {
+					const element = document.getElementById(name)
+					if (!element) continue
+					element.src = `${root}/${path}`
+					element.alt = `${name} logo`
+				}
 				const params = new URLSearchParams(window.location.search)
 				document.getElementById('name').textContent = params.get('name').trim() || 'Elizabeth Bennet'
 				document.getElementById('title').textContent = params.get('title').trim() || 'Editorial Director'
@@ -57,7 +52,6 @@
 			function copySignature() {
 				const element = document.getElementById('signature')
 				let range, selection
-
 				if (document.body.createTextRange) {
 					range = document.body.createTextRange()
 					range.moveToElement(element)
@@ -78,19 +72,37 @@
 	</head>
 	<body>
 		<div id="signature">
-			<span id="name"></span>
-			<br />
-			<span id="title"></span>
-			<br />
-			<br />
-			<a href="https://megahydronics.com"><img class="megahydronics" /></a>
-			<br />
-			114-4268 Lozells Ave, Burnaby, BC V5A 0C6<img class="spacer" />
-			<br />
-			604-620-6121&nbsp;
-			<a href="https://ca.linkedin.com/company/megahydronics-inc"><img class="linkedin" /></a>
-			<a href="https://www.facebook.com/MegaHydronics"><img class="facebook" /></a>
-			<a href="https://www.instagram.com/megahydronics"><img class="instagram" /></a>
+			<table style="border-collapse: collapse; font-family: 'Aptos', system-ui, sans-serif; font-size: 11pt">
+				<tr>
+					<td>
+						<span id="name" style="font-weight: bold"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span id="title"></span>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size: 6pt">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="https://megahydronics.com"><img id="MegaHydronics" /></a>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size: 9pt">114-4268 Lozells Ave, Burnaby, BC V5A 0C6</td>
+				</tr>
+				<tr>
+					<td style="font-size: 9pt">
+						604-620-6121&nbsp;
+						<a style="text-decoration: unset" href="https://ca.linkedin.com/company/megahydronics-inc"><img id="LinkedIn" style="vertical-align: middle" /></a>
+						<a style="text-decoration: unset" href="https://www.facebook.com/MegaHydronics"><img id="Facebook" style="vertical-align: middle" /></a>
+						<a style="text-decoration: unset" href="https://www.instagram.com/megahydronics"><img id="Instagram" style="vertical-align: middle" /></a>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<button onclick="copySignature()">Copy Signature</button>
 	</body>
