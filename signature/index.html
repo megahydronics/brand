@@ -45,7 +45,7 @@
 					const element = document.getElementById(name)
 					if (!element) continue
 					element.src = `${root}/${path}`
-					element.alt = `${name} logo`
+					element.alt = name
 				}
 				const params = new URLSearchParams(window.location.search)
 				document.getElementById('name').textContent = params.get('name').trim() || 'Elizabeth Bennet'
